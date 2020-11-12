@@ -28,7 +28,7 @@ export -f accept_from_host
 generate_iptables_commands() {
         set -e
         hcloud server list -onoheader | awk '{ print "accept_from_host " $2 " " $4 }' | bash
-        hcloud load-balancer list -onoheader | awk '{ print "accept_from_host " $2 " " $3 }' | sh
+        hcloud load-balancer list -onoheader | awk '{ print "accept_from_host " $2 " " $3 }' | bash
 }
 
 create_firewall_script() {
