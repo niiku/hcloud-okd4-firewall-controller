@@ -22,12 +22,13 @@ accept_from_host() {
 echo \"Allowing traffic from $1 ($2)\" >> \$LOGFILE
 iptables -A INPUT -s $2 -j ACCEPT"
 }
+
 export -f accept_from_host
 
 generate_iptables_commands() {
         set -e
         hcloud server list -onoheader | awk '{ print "accept_from_host " $2 " " $4 }' | bash
-        hcloud load-balancer list -onoheader | awk '{ print "accept_from_host " $2 " " $3 }' | bash
+        hcloud load-balancer list -onoheader | awk '{ print "accept_from_host " $2 " " $3 }' | sh
 }
 
 create_firewall_script() {
@@ -59,7 +60,7 @@ EOF
 
 apply_machineconfig() {
         set -e
-        cat <<EOF
+        kubectl apply -f - <<EOF
 apiVersion: machineconfiguration.openshift.io/v1
 kind: MachineConfig
 metadata:
