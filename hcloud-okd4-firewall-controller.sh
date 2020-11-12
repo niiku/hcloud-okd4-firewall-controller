@@ -6,6 +6,12 @@ if [ "$DEBUG" == "true" ]; then
         echo "DEBUG enabled"
         set -o xtrace
 fi
+
+if [ "x$HCLOUD_TOKEN" == "x" ]; then
+        echo "HCLOUD_TOKEN environment variable not set"
+        exit
+fi
+
 INTERVAL_SECONDS=${INTERVAL_SECONDS:-60}
 set -o nounset
 echo "Starting hcloud-okd4-iptables-machineconfig script..."
