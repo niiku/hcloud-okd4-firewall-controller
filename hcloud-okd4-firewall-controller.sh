@@ -1,5 +1,5 @@
 #!/bin/bash
-set -o errexit
+set -e
 set -o pipefail
 
 if [ "$DEBUG" == "true" ]; then
