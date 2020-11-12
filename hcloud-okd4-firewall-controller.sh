@@ -62,7 +62,7 @@ EOF
 
 apply_machineconfig() {
         set -e
-        cat <<EOF
+        kubectl apply -f - <<EOF
 apiVersion: machineconfiguration.openshift.io/v1
 kind: MachineConfig
 metadata:
