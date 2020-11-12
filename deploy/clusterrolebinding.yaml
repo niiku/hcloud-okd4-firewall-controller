@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: hcloud-okd4-firewall-controller
+subjects:
+- kind: ServiceAccount
+  name: hcloud-okd4-firewall-controller
+  namespace: hcloud-okd4-firewall-controller
+roleRef:
+    kind: ClusterRole
+    name: hcloud-okd4-firewall-controller
+    apiGroup: rbac.authorization.k8s.io

@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hcloud-okd4-firewall-controller
+  labels:
+    app: hcloud-okd4-firewall-controller
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hcloud-okd4-firewall-controller
+  template:
+    metadata:
+      labels:
+        app: hcloud-okd4-firewall-controller
+    spec:
+      serviceAccount: hcloud-okd4-firewall-controller
+      containers:
+      - name: hcloud-okd4-firewall-controller
+        image: niiku/hcloud-okd4-firewall-controller:v0.2.0
+        envFrom:
+        - secretRef:
+            name: hcloud-okd4-firewall-controller
