@@ -25,6 +25,7 @@ iptables -A INPUT -s $2 -j ACCEPT"
 }
 
 generate_iptables_commands() {
+        set -e
         eval "$(hcloud server list -onoheader | awk '{ print "accept_from_host " $2 " " $4 }')"
         eval "$(hcloud load-balancer list -onoheader | awk '{ print "accept_from_host " $2 " " $3 }')"
 
@@ -58,6 +59,7 @@ EOF
 }
 
 apply_machineconfig() {
+        set -e
         kubectl apply -f - <<EOF
 apiVersion: machineconfiguration.openshift.io/v1
 kind: MachineConfig
